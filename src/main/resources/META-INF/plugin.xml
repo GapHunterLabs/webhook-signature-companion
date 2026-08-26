@@ -37,5 +37,6 @@
             implementationClass="dev.gaphunter.webhooksignaturecompanion.gutter.MissingWebhookSignatureLineMarkerProvider"/>
         <codeInsight.lineMarkerProvider language="kotlin"
             implementationClass="dev.gaphunter.webhooksignaturecompanion.gutter.MissingWebhookSignatureLineMarkerProvider"/>
+        <notificationGroup id="Webhook Signature Companion" displayType="BALLOON"/>
     </extensions>
 </idea-plugin>

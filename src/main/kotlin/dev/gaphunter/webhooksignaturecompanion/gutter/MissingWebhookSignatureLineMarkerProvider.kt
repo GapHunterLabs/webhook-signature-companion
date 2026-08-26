@@ -8,6 +8,7 @@ import com.intellij.psi.PsiElement
 import dev.gaphunter.webhooksignaturecompanion.detect.JavaWebhookFinder
 import dev.gaphunter.webhooksignaturecompanion.detect.KotlinWebhookFinder
 import dev.gaphunter.webhooksignaturecompanion.model.WebhookHit
+import dev.gaphunter.webhooksignaturecompanion.review.ReviewPrompt
 
 class MissingWebhookSignatureLineMarkerProvider : LineMarkerProviderDescriptor(), DumbAware {
 
@@ -28,6 +29,10 @@ class MissingWebhookSignatureLineMarkerProvider : LineMarkerProviderDescriptor()
         for (element in elements) {
             val hit = hitsByElement[element] ?: continue
             result.add(buildMarker(hit))
+
+            val path = file.virtualFile?.path ?: continue
+            val lineNumber = file.viewProvider.document?.getLineNumber(element.textRange.startOffset) ?: -1
+            ReviewPrompt.recordHit(file.project, "$path:$lineNumber")
         }
     }
 
