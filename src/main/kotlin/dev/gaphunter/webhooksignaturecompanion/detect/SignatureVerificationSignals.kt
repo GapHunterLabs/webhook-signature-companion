@@ -22,8 +22,20 @@ object SignatureVerificationSignals {
         "verifywebhook",
     )
 
-    /** Broader, single-word signals that show up as literals/API calls even outside a named helper method (e.g. `Mac.getInstance("HmacSHA256")` inlined directly in the handler). */
-    private val RAW_TEXT_FRAGMENTS = listOf("hmac", "mac.getinstance", "signature")
+    /**
+     * Broader, single-word signals that show up as literals/API calls
+     * even outside a named helper method (e.g. `Mac.getInstance("HmacSHA256")`
+     * inlined directly in the handler). Includes `constructevent` --
+     * Stripe's own official Java SDK verification helper
+     * (`com.stripe.net.Webhook.constructEvent(payload, sigHeader,
+     * secret)`, throws `SignatureVerificationException` on a bad
+     * signature) is the textbook-correct way to do exactly what this
+     * plugin checks for, and it contains none of the other fragments
+     * below -- without this, the single most canonical, recommended
+     * verification call for one of the three providers this plugin's
+     * own README names (Stripe/GitHub/Slack) would be a false positive.
+     */
+    private val RAW_TEXT_FRAGMENTS = listOf("hmac", "mac.getinstance", "signature", "constructevent")
 
     fun bodyLooksVerified(bodyText: String): Boolean {
         val lower = bodyText.lowercase()
