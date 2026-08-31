@@ -35,6 +35,22 @@ class KotlinWebhookFinderTest : BasePlatformTestCase() {
         assertTrue(KotlinWebhookFinder.findAll(file).isEmpty())
     }
 
+    fun `test a webhook endpoint using Stripe's official Webhook-constructEvent is not flagged`() {
+        val file = myFixture.configureByText(
+            "WebhookController.kt",
+            """
+            class WebhookController {
+                @PostMapping("/webhooks/stripe")
+                fun receiveEvent(@RequestHeader("Stripe-Signature") sig: String, @RequestBody payload: String) {
+                    val event = Webhook.constructEvent(payload, sig, endpointSecret)
+                    orderService.process(event)
+                }
+            }
+            """.trimIndent(),
+        )
+        assertTrue(KotlinWebhookFinder.findAll(file).isEmpty())
+    }
+
     fun `test a non-webhook endpoint is never flagged, even with no verification`() {
         val file = myFixture.configureByText(
             "OrderController.kt",

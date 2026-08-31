@@ -19,8 +19,9 @@ old one.
 - **100% static text/PSI analysis** — matches the mapping path and a
   broad set of signature-verification signals by simple text (method
   names like `verifySignature`, or raw text like `hmac`/
-  `Mac.getInstance`), so it works whether the real crypto library is on
-  the classpath or not.
+  `Mac.getInstance`/Stripe's own official `Webhook.constructEvent`
+  helper), so it works whether the real crypto library is on the
+  classpath or not.
 - **Deliberately broad on what counts as "verified"** — any call whose
   name looks like a verification helper is accepted; this plugin
   doesn't try to confirm the helper's logic is actually *correct*, only

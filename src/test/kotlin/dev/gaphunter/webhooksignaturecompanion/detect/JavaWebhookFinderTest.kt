@@ -50,6 +50,22 @@ class JavaWebhookFinderTest : BasePlatformTestCase() {
         assertTrue(JavaWebhookFinder.findAll(file).isEmpty())
     }
 
+    fun `test a webhook endpoint using Stripe's official Webhook-constructEvent is not flagged`() {
+        val file = myFixture.configureByText(
+            "WebhookController.java",
+            """
+            class WebhookController {
+                @PostMapping("/webhooks/stripe")
+                void receiveEvent(@RequestHeader("Stripe-Signature") String sig, @RequestBody String payload) throws Exception {
+                    Event event = Webhook.constructEvent(payload, sig, endpointSecret);
+                    orderService.process(event);
+                }
+            }
+            """.trimIndent(),
+        )
+        assertTrue(JavaWebhookFinder.findAll(file).isEmpty())
+    }
+
     fun `test a non-webhook endpoint is never flagged, even with no verification`() {
         val file = myFixture.configureByText(
             "OrderController.java",
