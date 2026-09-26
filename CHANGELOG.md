@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [0.2.1]
+
+### Fixed
+
+- Review/star CTA now links to this plugin's own Marketplace
+  reviews page instead of the vendor's generic plugin list.
+
 ## [0.2.0]
 
 ### Fixed
@@ -34,7 +41,8 @@
 - 100% static text/PSI analysis, Java and Kotlin, no network calls, no
   telemetry. Free.
 
-[Unreleased]: https://github.com/GapHunterLabs/webhook-signature-companion/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/GapHunterLabs/webhook-signature-companion/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/GapHunterLabs/webhook-signature-companion/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/GapHunterLabs/webhook-signature-companion/compare/0.1.1...0.2.0
 [0.1.1]: https://github.com/GapHunterLabs/webhook-signature-companion/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/GapHunterLabs/webhook-signature-companion/commits/0.1.0
