@@ -6,6 +6,12 @@ in the handler body — the classic footgun where anyone who guesses (or
 finds leaked) the endpoint URL can send a forged event, because nothing
 checks the payload really came from the real sender.
 
+![Webhook Signature Companion: spot webhook endpoints that never verify the sender's signature](docs/media/hero.gif)
+
+Each feature on its own:
+[Unverified webhooks](docs/media/01-unverified-webhook.gif) ·
+[Verify it and it clears](docs/media/02-verify.gif)
+
 ## Why it exists
 
 Stripe, GitHub, Slack, and most real webhook providers document
